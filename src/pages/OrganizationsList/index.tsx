@@ -1,4 +1,3 @@
-// src/pages/OrganizationsList/OrganizationsList.tsx
 import React, { useState } from 'react';
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Container, Box, Typography } from '@mui/material';
 import {Modal} from '../../components/Modal';
@@ -12,7 +11,10 @@ export const OrganizationsList: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingOrg, setEditingOrg] = useState<Organization | null>(null);
 
-  // Новые состояния для ConfirmDialog
+
+  console.log('organizations', organizations);
+
+
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [orgToDelete, setOrgToDelete] = useState<string | null>(null);
 
