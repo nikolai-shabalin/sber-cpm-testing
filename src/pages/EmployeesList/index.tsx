@@ -105,29 +105,38 @@ export const EmployeesList: FunctionComponent = () => {
           Добавить сотрудника
         </Button>
       </Box>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Имя</TableCell>
-            <TableCell>Должность</TableCell>
-            <TableCell>Действия</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {employees.map((emp) => (
-            <TableRow key={emp.id}>
-              <TableCell>{emp.name}</TableCell>
-              <TableCell>{emp.position}</TableCell>
-              <TableCell>
-                <Button onClick={() => handleEdit(emp)}>Редактировать</Button>
-                <Button onClick={() => handleDelete(emp.id)} color="error">
-                  Удалить
-                </Button>
-              </TableCell>
+
+      {employees.length === 0 ? (
+        <Box display="flex" justifyContent="center" alignItems="center" height="200px">
+          <Typography color="textSecondary">
+            В организации пока нет сотрудников. Пожалуйста, добавьте нового сотрудника.
+          </Typography>
+        </Box>
+      ) : (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Имя</TableCell>
+              <TableCell>Должность</TableCell>
+              <TableCell>Действия</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {employees.map((emp) => (
+              <TableRow key={emp.id}>
+                <TableCell>{emp.name}</TableCell>
+                <TableCell>{emp.position}</TableCell>
+                <TableCell>
+                  <Button onClick={() => handleEdit(emp)}>Редактировать</Button>
+                  <Button onClick={() => handleDelete(emp.id)} color="error">
+                    Удалить
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
 
       <ConfirmDialog
         open={isConfirmOpen}

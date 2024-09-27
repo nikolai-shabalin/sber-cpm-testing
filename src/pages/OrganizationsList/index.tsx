@@ -74,6 +74,13 @@ export const OrganizationsList: React.FC = () => {
           Добавить организацию
         </Button>
       </Box>
+      {organizations.length === 0 ? (
+        <Box display="flex" justifyContent="center" alignItems="center" height="200px">
+          <Typography color="textSecondary">
+            Нет доступных организаций. Пожалуйста, добавьте новую организацию.
+          </Typography>
+        </Box>
+      ) : (
       <Table>
         <TableHead>
           <TableRow>
@@ -83,6 +90,7 @@ export const OrganizationsList: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
+          { organizations.length === 0 && <Typography>Нет организаций</Typography> }
           {organizations.map((org) => (
             <TableRow key={org.id}>
               <TableCell>{org.name}</TableCell>
@@ -100,6 +108,7 @@ export const OrganizationsList: React.FC = () => {
           ))}
         </TableBody>
       </Table>
+      )}
 
       <ConfirmDialog
         open={isConfirmOpen}
