@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Container, Box, Typography } from '@mui/material';
-import {Modal} from '../../components/Modal';
-import {OrganizationForm} from '../../components/OrganizationForm';
-import { getOrganizations, saveOrganizations, Organization } from '../../utils/storage';
-import {ConfirmDialog} from '../../components/ConfirmDialog';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Container,
+  Box,
+  Typography,
+} from '@mui/material';
+import { Modal } from '../../components/Modal';
+import { ModeEdit, Visibility, Delete } from '@mui/icons-material';
+import { OrganizationForm } from '../../components/OrganizationForm';
+import {
+  getOrganizations,
+  saveOrganizations,
+  Organization,
+} from '../../utils/storage';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import './index.module.scss';
 
 export const OrganizationsList: React.FC = () => {
-  const [organizations, setOrganizations] = useState<Organization[]>(getOrganizations());
+  const [organizations, setOrganizations] =
+    useState<Organization[]>(getOrganizations());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingOrg, setEditingOrg] = useState<Organization | null>(null);
 
-
   console.log('organizations', organizations);
-
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [orgToDelete, setOrgToDelete] = useState<string | null>(null);
@@ -67,7 +81,7 @@ export const OrganizationsList: React.FC = () => {
   return (
     <Container fixed>
       <Box my={4}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h1" gutterBottom>
           Организации
         </Typography>
         <Button variant="contained" color="primary" onClick={handleAdd}>
@@ -75,39 +89,61 @@ export const OrganizationsList: React.FC = () => {
         </Button>
       </Box>
       {organizations.length === 0 ? (
-        <Box display="flex" justifyContent="center" alignItems="center" height="200px">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="200px"
+        >
           <Typography color="textSecondary">
             Нет доступных организаций. Пожалуйста, добавьте новую организацию.
           </Typography>
         </Box>
       ) : (
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Название</TableCell>
-            <TableCell>Адрес</TableCell>
-            <TableCell>Действия</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          { organizations.length === 0 && <Typography>Нет организаций</Typography> }
-          {organizations.map((org) => (
-            <TableRow key={org.id}>
-              <TableCell>{org.name}</TableCell>
-              <TableCell>{org.address}</TableCell>
-              <TableCell>
-                <Button href={`/organizations/${org.id}/employees`} color="primary">
-                  Сотрудники
-                </Button>
-                <Button onClick={() => handleEdit(org)}>Редактировать</Button>
-                <Button onClick={() => handleDelete(org.id)} color="error">
-                  Удалить
-                </Button>
-              </TableCell>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Название</TableCell>
+              <TableCell>Адрес</TableCell>
+              <TableCell align="right">Действия</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {organizations.length === 0 && (
+              <Typography>Нет организаций</Typography>
+            )}
+            {organizations.map((org) => (
+              <TableRow key={org.id}>
+                <TableCell>{org.name}</TableCell>
+                <TableCell>{org.address}</TableCell>
+                <TableCell align="right">
+                  <Button
+                    href={`/organizations/${org.id}/employees`}
+                    color="primary"
+                    aria-label="Посмотреть сотрудников"
+                  >
+                    <Box display="flex" gap={1}>
+                      <Visibility /> Сотрудники
+                    </Box>
+                  </Button>
+                  <Button
+                    onClick={() => handleEdit(org)}
+                    aria-label="Редактировать"
+                  >
+                    <ModeEdit />
+                  </Button>
+                  <Button
+                    onClick={() => handleDelete(org.id)}
+                    color="error"
+                    aria-label="Удалить организацию"
+                  >
+                    <Delete />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       )}
 
       <ConfirmDialog

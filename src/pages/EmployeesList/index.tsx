@@ -11,6 +11,7 @@ import {
   Box,
   Container,
 } from '@mui/material';
+import { ModeEdit, Delete } from '@mui/icons-material';
 import { Modal } from '../../components/Modal';
 import { EmployeeForm } from '../../components/EmployeeForm';
 import { getEmployees, saveEmployees, Employee } from '../../utils/storage';
@@ -85,31 +86,35 @@ export const EmployeesList: FunctionComponent = () => {
 
   return (
     <Container fixed>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        my={4}
-      >
-        <Typography variant="h4" gutterBottom>
+      <Box my={4}>
+        <Typography variant="h1" gutterBottom>
           Сотрудники организации
         </Typography>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => navigate(-1)}
-        >
-          Назад к организациям
-        </Button>
-        <Button variant="contained" color="primary" onClick={handleAdd}>
-          Добавить сотрудника
-        </Button>
+
+        <Box gap={4} display="flex">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => navigate(-1)}
+          >
+            Назад к организациям
+          </Button>
+          <Button variant="contained" color="primary" onClick={handleAdd}>
+            Добавить сотрудника
+          </Button>
+        </Box>
       </Box>
 
       {employees.length === 0 ? (
-        <Box display="flex" justifyContent="center" alignItems="center" height="200px">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="200px"
+        >
           <Typography color="textSecondary">
-            В организации пока нет сотрудников. Пожалуйста, добавьте нового сотрудника.
+            В организации пока нет сотрудников. Пожалуйста, добавьте нового
+            сотрудника.
           </Typography>
         </Box>
       ) : (
@@ -118,7 +123,7 @@ export const EmployeesList: FunctionComponent = () => {
             <TableRow>
               <TableCell>Имя</TableCell>
               <TableCell>Должность</TableCell>
-              <TableCell>Действия</TableCell>
+              <TableCell align="right">Действия</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -126,10 +131,19 @@ export const EmployeesList: FunctionComponent = () => {
               <TableRow key={emp.id}>
                 <TableCell>{emp.name}</TableCell>
                 <TableCell>{emp.position}</TableCell>
-                <TableCell>
-                  <Button onClick={() => handleEdit(emp)}>Редактировать</Button>
-                  <Button onClick={() => handleDelete(emp.id)} color="error">
-                    Удалить
+                <TableCell align="right">
+                  <Button
+                    onClick={() => handleEdit(emp)}
+                    aria-label="Редактировать данные сотрудника"
+                  >
+                    <ModeEdit />
+                  </Button>
+                  <Button
+                    onClick={() => handleDelete(emp.id)}
+                    color="error"
+                    aria-label="Удалить сотрудника"
+                  >
+                    <Delete />
                   </Button>
                 </TableCell>
               </TableRow>

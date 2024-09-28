@@ -25,9 +25,13 @@
 - [x] css-modules (scss)
 - [x] eslint
 - [x] prettier
+
+## TODO
 - [] Тесты: jest + react-testing-library
 - [] Описать JSdoc
 - [] Добавить Redux || RTK
 - [] Добавить Storybook? ehehehe
 - [] Перепроверить работу с local storage
 - [] Сделать адаптив
+- [] Добавить пагинацию
+  - [] Добавить моки для пагинации
