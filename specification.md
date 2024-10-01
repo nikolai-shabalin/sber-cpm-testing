@@ -29,7 +29,7 @@
 - [] Тесты: jest + react-testing-library
 - [x] Описать JSdoc
 - [x] Добавить Redux || RTK
-- [] Добавить Storybook?
+- [x] Добавить Storybook?
 - [] Перепроверить работу с local storage
 - [x] Сделать адаптив. Не делать
 - [] Добавить пагинацию
