@@ -16,7 +16,6 @@ import { Modal } from '../../components/Modal';
 import { EmployeeForm } from '../../components/EmployeeForm';
 import { getEmployees, saveEmployees, Employee } from '../../utils/storage';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
-import './index.module.scss';
 
 export const EmployeesList: FunctionComponent = () => {
   const { orgId } = useParams<{ orgId: string }>();

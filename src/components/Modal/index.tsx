@@ -22,10 +22,8 @@ export const Modal: FunctionComponent<ModalProps> = ({
   open,
   onClose,
   children,
-}) => {
-  return (
-    <MuiModal open={open} onClose={onClose} aria-labelledby="modal-title">
-      <Box sx={style}>{children}</Box>
-    </MuiModal>
-  );
-};
+}) => (
+  <MuiModal open={open} onClose={onClose} aria-labelledby="modal-title">
+    <Box sx={style}>{children}</Box>
+  </MuiModal>
+);

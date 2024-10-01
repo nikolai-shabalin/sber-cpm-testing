@@ -22,28 +22,26 @@ export const ConfirmDialog: FunctionComponent<ConfirmDialogProps> = ({
   content,
   onClose,
   onConfirm,
-}) => {
-  return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      aria-labelledby="confirm-dialog-title"
-      aria-describedby="confirm-dialog-description"
-    >
-      <DialogTitle id="confirm-dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="confirm-dialog-description">
-          {content}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Отмена
-        </Button>
-        <Button onClick={onConfirm} color="error" variant="contained" autoFocus>
-          Удалить
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
+}) => (
+  <Dialog
+    open={open}
+    onClose={onClose}
+    aria-labelledby="confirm-dialog-title"
+    aria-describedby="confirm-dialog-description"
+  >
+    <DialogTitle id="confirm-dialog-title">{title}</DialogTitle>
+    <DialogContent>
+      <DialogContentText id="confirm-dialog-description">
+        {content}
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={onClose} color="primary">
+        Отмена
+      </Button>
+      <Button onClick={onConfirm} color="error" variant="contained" autoFocus>
+        Удалить
+      </Button>
+    </DialogActions>
+  </Dialog>
+);

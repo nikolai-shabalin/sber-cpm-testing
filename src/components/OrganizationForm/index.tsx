@@ -68,4 +68,4 @@ export const OrganizationForm: FunctionComponent<OrganizationFormProps> = ({
       </Form>
     )}
   </Formik>
-)
+);

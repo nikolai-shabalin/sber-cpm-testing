@@ -19,7 +19,6 @@ import {
   Organization,
 } from '../../utils/storage';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
-import './index.module.scss';
 
 export const OrganizationsList: React.FC = () => {
   const [organizations, setOrganizations] =
