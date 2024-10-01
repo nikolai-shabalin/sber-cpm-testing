@@ -1,31 +1,27 @@
 import { useState, FunctionComponent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-  Box,
-  Container,
-} from '@mui/material';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography, Box, Container } from '@mui/material';
+import {Modal} from '../../components/Modal';
+import {EmployeeForm} from '../../components/EmployeeForm';
+import {ConfirmDialog} from '../../components/ConfirmDialog';
+import { useSelector, useDispatch } from 'react-redux';
 import { ModeEdit, Delete } from '@mui/icons-material';
-import { Modal } from '../../components/Modal';
-import { EmployeeForm } from '../../components/EmployeeForm';
-import { getEmployees, saveEmployees, Employee } from '../../utils/storage';
-import { ConfirmDialog } from '../../components/ConfirmDialog';
+import { RootState, AppDispatch } from '../../store';
+import { addEmployee, updateEmployee, deleteEmployee } from '../../store/employeesSlice';
+import { Employee } from '../../utils/storage';
 
 export const EmployeesList: FunctionComponent = () => {
   const { orgId } = useParams<{ orgId: string }>();
   const navigate = useNavigate();
-  const [employees, setEmployees] = useState<Employee[]>(
-    getEmployees().filter((emp) => emp.organizationId === orgId)
+  const allEmployees = useSelector((state: RootState) =>
+    state.employees.employees.filter(emp => emp.organizationId === orgId)
   );
+  const dispatch = useDispatch<AppDispatch>();
+  const [employees, setEmployees] = useState<Employee[]>(allEmployees);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmp, setEditingEmp] = useState<Employee | null>(null);
 
+  // Состояния для ConfirmDialog
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [empToDelete, setEmpToDelete] = useState<string | null>(null);
 
@@ -46,9 +42,7 @@ export const EmployeesList: FunctionComponent = () => {
 
   const confirmDelete = () => {
     if (empToDelete) {
-      const updatedEmps = employees.filter((emp) => emp.id !== empToDelete);
-      setEmployees(updatedEmps);
-      saveEmployees(getEmployees().filter((emp) => emp.id !== empToDelete));
+      dispatch(deleteEmployee(empToDelete));
       setEmpToDelete(null);
       setIsConfirmOpen(false);
     }
@@ -61,24 +55,10 @@ export const EmployeesList: FunctionComponent = () => {
 
   const handleSubmit = (values: { name: string; position: string }) => {
     if (editingEmp) {
-      const updatedEmps = employees.map((emp) =>
-        emp.id === editingEmp.id ? { ...emp, ...values } : emp
-      );
-      setEmployees(updatedEmps);
-      saveEmployees(
-        getEmployees().map((emp) =>
-          emp.id === editingEmp.id ? { ...emp, ...values } : emp
-        )
-      );
+      dispatch(updateEmployee({ ...editingEmp, ...values }));
     } else {
-      const newEmp: Employee = {
-        id: Date.now().toString(),
-        organizationId: orgId!,
-        ...values,
-      };
-      const updatedEmps = [...employees, newEmp];
-      setEmployees(updatedEmps);
-      saveEmployees([...getEmployees(), newEmp]);
+      const newEmp: Employee = { id: Date.now().toString(), organizationId: orgId!, ...values };
+      dispatch(addEmployee(newEmp));
     }
     setIsModalOpen(false);
   };

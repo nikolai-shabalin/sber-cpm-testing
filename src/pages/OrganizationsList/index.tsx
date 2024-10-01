@@ -1,33 +1,22 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Container,
-  Box,
-  Typography,
-} from '@mui/material';
-import { Modal } from '../../components/Modal';
-import { ModeEdit, Visibility, Delete } from '@mui/icons-material';
-import { OrganizationForm } from '../../components/OrganizationForm';
-import {
-  getOrganizations,
-  saveOrganizations,
-  Organization,
-} from '../../utils/storage';
-import { ConfirmDialog } from '../../components/ConfirmDialog';
+import { useState, FunctionComponent } from 'react';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography, Box, Container } from '@mui/material';
+import {Modal} from '../../components/Modal';
+import {OrganizationForm} from '../../components/OrganizationForm';
+import {ConfirmDialog} from '../../components/ConfirmDialog';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store';
+import { addOrganization, updateOrganization, deleteOrganization } from '../../store/organizationsSlice';
+import { Organization } from '../../utils/storage';
+import { ModeEdit, Delete, Visibility } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
-export const OrganizationsList: React.FC = () => {
-  const [organizations, setOrganizations] =
-    useState<Organization[]>(getOrganizations());
+export const OrganizationsList: FunctionComponent = () => {
+  const organizations = useSelector((state: RootState) => state.organizations.organizations);
+  const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingOrg, setEditingOrg] = useState<Organization | null>(null);
 
-  console.log('organizations', organizations);
-
+  // Состояния для ConfirmDialog
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [orgToDelete, setOrgToDelete] = useState<string | null>(null);
 
@@ -48,9 +37,7 @@ export const OrganizationsList: React.FC = () => {
 
   const confirmDelete = () => {
     if (orgToDelete) {
-      const updatedOrgs = organizations.filter((org) => org.id !== orgToDelete);
-      setOrganizations(updatedOrgs);
-      saveOrganizations(updatedOrgs);
+      dispatch(deleteOrganization(orgToDelete));
       setOrgToDelete(null);
       setIsConfirmOpen(false);
     }
@@ -63,16 +50,10 @@ export const OrganizationsList: React.FC = () => {
 
   const handleSubmit = (values: { name: string; address: string }) => {
     if (editingOrg) {
-      const updatedOrgs = organizations.map((org) =>
-        org.id === editingOrg.id ? { ...org, ...values } : org
-      );
-      setOrganizations(updatedOrgs);
-      saveOrganizations(updatedOrgs);
+      dispatch(updateOrganization({ ...editingOrg, ...values }));
     } else {
       const newOrg: Organization = { id: Date.now().toString(), ...values };
-      const updatedOrgs = [...organizations, newOrg];
-      setOrganizations(updatedOrgs);
-      saveOrganizations(updatedOrgs);
+      dispatch(addOrganization(newOrg));
     }
     setIsModalOpen(false);
   };
@@ -117,7 +98,8 @@ export const OrganizationsList: React.FC = () => {
                 <TableCell>{org.address}</TableCell>
                 <TableCell align="right">
                   <Button
-                    href={`/organizations/${org.id}/employees`}
+                    component={Link}
+                    to={`/organizations/${org.id}/employees`}
                     color="primary"
                     aria-label="Посмотреть сотрудников"
                   >
