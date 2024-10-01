@@ -20,7 +20,6 @@
 - [x] Бойлерплейт - любой (vit, cra, next.js, кастомный webpack-config и т.д.).
 
 ### Добавлено от себя
-- [] faker-js для генерации данных
 - [x] pnpm
 - [x] css-modules (scss)
 - [x] eslint
@@ -29,7 +28,7 @@
 ## TODO
 - [] Тесты: jest + react-testing-library
 - [] Описать JSdoc
-- [] Добавить Redux || RTK
+- [x] Добавить Redux || RTK
 - [] Добавить Storybook? ehehehe
 - [] Перепроверить работу с local storage
 - [] Сделать адаптив
