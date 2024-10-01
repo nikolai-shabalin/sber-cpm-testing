@@ -1,17 +1,13 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { OrganizationForm } from '.';
 
 export default {
   title: 'Компоненты/OrganizationForm',
   component: OrganizationForm,
-} as ComponentMeta<typeof OrganizationForm>;
+} as Meta<typeof OrganizationForm>;
 
-const Template: ComponentStory<typeof OrganizationForm> = (args) => <OrganizationForm {...args} />;
+const Template: StoryFn<typeof OrganizationForm> = (args) => (
+  <OrganizationForm {...args} />
+);
 
 export const Default = Template.bind({});
-Default.args = {
-  organizationName: 'Пример организации',
-  organizationType: 'Тип организации',
-  onSubmit: (data) => alert(`Submitted: ${JSON.stringify(data)}`),
-};

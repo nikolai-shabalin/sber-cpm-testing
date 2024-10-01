@@ -1,11 +1,25 @@
 import { useState, FunctionComponent } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography, Box, Container } from '@mui/material';
-import {Modal} from '../../components/Modal';
-import {OrganizationForm} from '../../components/OrganizationForm';
-import {ConfirmDialog} from '../../components/ConfirmDialog';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+  Box,
+  Container,
+} from '@mui/material';
+import { Modal } from '../../components/Modal';
+import { OrganizationForm } from '../../components/OrganizationForm';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { addOrganization, updateOrganization, deleteOrganization } from '../../store/organizationsSlice';
+import {
+  addOrganization,
+  updateOrganization,
+  deleteOrganization,
+} from '../../store/organizationsSlice';
 import { Organization } from '../../utils/storage';
 import { ModeEdit, Delete, Visibility } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -14,7 +28,9 @@ import { Link } from 'react-router-dom';
  * Компонент OrganizationsList отображает список организаций.
  */
 export const OrganizationsList: FunctionComponent = () => {
-  const organizations = useSelector((state: RootState) => state.organizations.organizations);
+  const organizations = useSelector(
+    (state: RootState) => state.organizations.organizations
+  );
   const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingOrg, setEditingOrg] = useState<Organization | null>(null);

@@ -22,19 +22,24 @@ const employeesSlice = createSlice({
       saveEmployees(state.employees);
     },
     updateEmployee: (state, action: PayloadAction<Employee>) => {
-      const index = state.employees.findIndex(emp => emp.id === action.payload.id);
+      const index = state.employees.findIndex(
+        (emp) => emp.id === action.payload.id
+      );
       if (index !== -1) {
         state.employees[index] = action.payload;
         saveEmployees(state.employees);
       }
     },
     deleteEmployee: (state, action: PayloadAction<string>) => {
-      state.employees = state.employees.filter(emp => emp.id !== action.payload);
+      state.employees = state.employees.filter(
+        (emp) => emp.id !== action.payload
+      );
       saveEmployees(state.employees);
     },
   },
 });
 
-export const { addEmployee, updateEmployee, deleteEmployee } = employeesSlice.actions;
+export const { addEmployee, updateEmployee, deleteEmployee } =
+  employeesSlice.actions;
 
 export default employeesSlice.reducer;

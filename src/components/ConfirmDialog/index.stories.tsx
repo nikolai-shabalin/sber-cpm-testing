@@ -1,13 +1,14 @@
-// src/stories/ConfirmDialog.stories.tsx
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import {ConfirmDialog} from './';
+import { Meta, StoryFn } from '@storybook/react';
+import { ConfirmDialog } from './';
 
 export default {
   title: 'Компоненты/ConfirmDialog',
   component: ConfirmDialog,
-} as ComponentMeta<typeof ConfirmDialog>;
+} as Meta<typeof ConfirmDialog>;
 
-const Template: ComponentStory<typeof ConfirmDialog> = (args) => <ConfirmDialog {...args} />;
+const Template: StoryFn<typeof ConfirmDialog> = (args) => (
+  <ConfirmDialog {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -15,6 +16,5 @@ Default.args = {
   open: true,
   title: 'Подтвердите действие',
   content: 'Вы уверены, что хотите продолжить?',
-  onConfirm: () => alert('Подтверждено'),
-  onCancel: () => alert('Отменено'),
+  onConfirm: () => alert('Подтверждено')
 };

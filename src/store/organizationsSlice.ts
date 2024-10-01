@@ -22,19 +22,24 @@ const organizationsSlice = createSlice({
       saveOrganizations(state.organizations);
     },
     updateOrganization: (state, action: PayloadAction<Organization>) => {
-      const index = state.organizations.findIndex(org => org.id === action.payload.id);
+      const index = state.organizations.findIndex(
+        (org) => org.id === action.payload.id
+      );
       if (index !== -1) {
         state.organizations[index] = action.payload;
         saveOrganizations(state.organizations);
       }
     },
     deleteOrganization: (state, action: PayloadAction<string>) => {
-      state.organizations = state.organizations.filter(org => org.id !== action.payload);
+      state.organizations = state.organizations.filter(
+        (org) => org.id !== action.payload
+      );
       saveOrganizations(state.organizations);
     },
   },
 });
 
-export const { addOrganization, updateOrganization, deleteOrganization } = organizationsSlice.actions;
+export const { addOrganization, updateOrganization, deleteOrganization } =
+  organizationsSlice.actions;
 
 export default organizationsSlice.reducer;

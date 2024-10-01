@@ -55,7 +55,7 @@ export const EmployeeForm: FunctionComponent<EmployeeFormProps> = ({
               variant="outlined"
               fullWidth
               helperText={<ErrorMessage name="position" />}
-              error={Boolean(ErrorMessage.position)}
+              error={Boolean(ErrorMessage)}
             />
             <Button
               type="submit"
