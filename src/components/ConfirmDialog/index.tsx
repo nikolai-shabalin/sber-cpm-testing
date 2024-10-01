@@ -8,6 +8,15 @@ import {
   Button,
 } from '@mui/material';
 
+/**
+ * Свойства для компонента ConfirmDialog.
+ *
+ * @property open - Флаг, указывающий, открыт ли диалог.
+ * @property title - Заголовок диалога.
+ * @property content - Содержимое диалога.
+ * @property onClose - Функция, вызываемая при закрытии диалога.
+ * @property onConfirm - Функция, вызываемая при подтверждении действия в диалоге.
+ */
 interface ConfirmDialogProps {
   open: boolean;
   title: string;
@@ -16,6 +25,9 @@ interface ConfirmDialogProps {
   onConfirm: () => void;
 }
 
+/**
+ * Компонент ConfirmDialog отображает диалоговое окно подтверждения.
+ */
 export const ConfirmDialog: FunctionComponent<ConfirmDialogProps> = ({
   open,
   title,

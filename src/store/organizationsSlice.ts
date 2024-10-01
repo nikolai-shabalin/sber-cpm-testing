@@ -10,6 +10,9 @@ const initialState: OrganizationsState = {
   organizations: getOrganizations(),
 };
 
+/**
+ * Срез состояния для управления организациями.
+ */
 const organizationsSlice = createSlice({
   name: 'organizations',
   initialState,

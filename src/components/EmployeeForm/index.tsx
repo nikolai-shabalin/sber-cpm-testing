@@ -3,6 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button, Box } from '@mui/material';
 
+/**
+ * Компонент формы сотрудника.
+ *
+ * @interface EmployeeFormProps
+ * @property initialValues - Начальные значения формы.
+ * @property onSubmit - Функция, вызываемая при отправке формы.
+ */
 interface EmployeeFormProps {
   initialValues: {
     name: string;
@@ -11,6 +18,9 @@ interface EmployeeFormProps {
   onSubmit: (values: { name: string; position: string }) => void;
 }
 
+/**
+ * Компонент формы для ввода данных сотрудника.
+ */
 export const EmployeeForm: FunctionComponent<EmployeeFormProps> = ({
   initialValues,
   onSubmit,

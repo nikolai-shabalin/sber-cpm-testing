@@ -10,6 +10,9 @@ const initialState: EmployeesState = {
   employees: getEmployees(),
 };
 
+/**
+ * Срез состояния сотрудников.
+ */
 const employeesSlice = createSlice({
   name: 'employees',
   initialState,

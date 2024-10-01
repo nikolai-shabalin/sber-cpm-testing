@@ -3,6 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button, Box } from '@mui/material';
 
+/**
+ * Свойства компонента OrganizationForm.
+ *
+ * @property initialValues - Начальные значения формы.
+ * @property onSubmit - Функция, вызываемая при отправке формы.
+ */
 interface OrganizationFormProps {
   initialValues: {
     name: string;
@@ -16,6 +22,9 @@ const validationSchema = Yup.object({
   address: Yup.string().required('Обязательное поле'),
 });
 
+/**
+ * Компонент формы организации.
+ */
 export const OrganizationForm: FunctionComponent<OrganizationFormProps> = ({
   initialValues,
   onSubmit,

@@ -1,6 +1,13 @@
 import { ReactNode, FunctionComponent } from 'react';
 import { Modal as MuiModal, Box } from '@mui/material';
 
+/**
+ * Свойства компонента Modal.
+ *
+ * @property open - Определяет, открыт ли модальный диалог.
+ * @property onClose - Функция, вызываемая при закрытии модального диалога.
+ * @property children - Дочерние элементы, отображаемые внутри модального диалога.
+ */
 interface ModalProps {
   open: boolean;
   onClose: () => void;
@@ -18,6 +25,9 @@ const style = {
   p: 4,
 };
 
+/**
+ * Компонент модального окна.
+ */
 export const Modal: FunctionComponent<ModalProps> = ({
   open,
   onClose,

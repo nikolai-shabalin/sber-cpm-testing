@@ -10,6 +10,8 @@ import { RootState, AppDispatch } from '../../store';
 import { addEmployee, updateEmployee, deleteEmployee } from '../../store/employeesSlice';
 import { Employee } from '../../utils/storage';
 
+/**
+ * Компонент `EmployeesList` отображает список сотрудников организации. */
 export const EmployeesList: FunctionComponent = () => {
   const { orgId } = useParams<{ orgId: string }>();
   const navigate = useNavigate();

@@ -10,6 +10,9 @@ import { Organization } from '../../utils/storage';
 import { ModeEdit, Delete, Visibility } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
+/**
+ * Компонент OrganizationsList отображает список организаций.
+ */
 export const OrganizationsList: FunctionComponent = () => {
   const organizations = useSelector((state: RootState) => state.organizations.organizations);
   const dispatch = useDispatch<AppDispatch>();
